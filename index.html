@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14284b">
+<meta name="description" content="وب‌اپلیکیشن آموزشی مدرسه مهد دانش">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<title>مهد دانش | آموزش هوشمند</title>
+</head>
+<body>
+<header class="topbar">
+  <button class="icon-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+  <div class="brand">
+    <img src="logo.svg" alt="آرم مهد دانش" class="logo">
+    <div><strong>مهد دانش</strong><small>آموزش هوشمند، آینده روشن</small></div>
+  </div>
+  <button class="avatar" id="profileBtn" title="پروفایل">م</button>
+</header>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="user-card"><div class="user-icon">م</div><div><strong id="userName">دانش‌آموز نمونه</strong><small id="userRole">پنل دانش‌آموز</small></div></div>
+    <nav>
+      <button class="nav-item active" data-page="home">⌂ <span>داشبورد</span></button>
+      <button class="nav-item" data-page="lessons">▤ <span>درس‌ها</span></button>
+      <button class="nav-item" data-page="quiz">✓ <span>آزمون‌ها</span></button>
+      <button class="nav-item" data-page="report">▥ <span>کارنامه من</span></button>
+      <button class="nav-item" data-page="teacher">✎ <span>پنل معلم</span></button>
+      <button class="nav-item" data-page="admin">⚙ <span>پنل مدیریت</span></button>
+    </nav>
+    <div class="sidebar-note"><span class="dot"></span> نسخه نمایشی آفلاین</div>
+  </aside>
+
+  <main class="main">
+    <section class="welcome">
+      <div><span class="eyebrow">مدرسه مهد دانش</span><h1 id="greeting">سلام، خوش آمدی! 👋</h1><p>امروز یک قدم به یادگیری بهتر نزدیک‌تر شو.</p></div>
+      <div class="welcome-mark">✦</div>
+    </section>
+
+    <section class="page active" id="page-home">
+      <div class="stat-grid">
+        <article class="stat-card"><span class="stat-icon blue">▤</span><div><small>درس‌های آماده</small><strong id="lessonCount">۶</strong></div></article>
+        <article class="stat-card"><span class="stat-icon gold">✓</span><div><small>آزمون‌های انجام‌شده</small><strong id="quizCount">۰</strong></div></article>
+        <article class="stat-card"><span class="stat-icon green">★</span><div><small>میانگین امتیاز</small><strong id="averageScore">—</strong></div></article>
+      </div>
+      <div class="section-heading"><div><h2>ادامه یادگیری</h2><p>درس‌های کوتاه و تمرین‌های کاربردی</p></div><button class="text-btn" data-goto="lessons">همه درس‌ها ←</button></div>
+      <div class="lesson-grid" id="homeLessons"></div>
+      <div class="section-heading"><div><h2>مسیر پیشرفت</h2><p>پیشرفت خودت را قدم‌به‌قدم دنبال کن</p></div></div>
+      <article class="progress-card"><div class="progress-top"><div><strong>برنامه این هفته</strong><small id="progressText">۰ از ۵ فعالیت تکمیل شده</small></div><span class="medal">🏅</span></div><div class="progress-track"><div id="weekProgress" class="progress-fill"></div></div><div class="progress-foot"><span>شروع کن، هر قدم مهم است.</span><button class="gold-btn small" data-goto="quiz">شروع آزمون</button></div></article>
+    </section>
+
+    <section class="page" id="page-lessons">
+      <div class="section-heading"><div><h2>کتابخانه درس‌ها</h2><p>محتوای نمونه برای پایه‌های ابتدایی</p></div></div>
+      <div class="filters"><select id="gradeFilter" aria-label="انتخاب پایه"><option value="all">همه پایه‌ها</option><option value="1">پایه اول</option><option value="2">پایه دوم</option><option value="3">پایه سوم</option><option value="4">پایه چهارم</option><option value="5">پایه پنجم</option><option value="6">پایه ششم</option></select><select id="subjectFilter" aria-label="انتخاب درس"><option value="all">همه درس‌ها</option><option value="ریاضی">ریاضی</option><option value="علوم">علوم</option><option value="فارسی">فارسی</option><option value="انگلیسی">انگلیسی</option></select></div>
+      <div class="lesson-grid" id="allLessons"></div>
+    </section>
+
+    <section class="page" id="page-lesson-detail">
+      <button class="back-btn" data-goto="lessons">← بازگشت به درس‌ها</button>
+      <article class="detail-card"><span class="pill" id="detailMeta"></span><h2 id="detailTitle"></h2><p id="detailIntro"></p><div class="lesson-content" id="detailContent"></div><div class="detail-actions"><button class="gold-btn" id="markLesson">✓ ثبت مطالعه درس</button><button class="outline-btn" data-goto="quiz">رفتن به آزمون‌ها</button></div></article>
+    </section>
+
+    <section class="page" id="page-quiz">
+      <div class="section-heading"><div><h2>آزمون‌های کوتاه</h2><p>برای تمرین و شناخت بهتر آموخته‌ها</p></div></div>
+      <div class="quiz-intro"><span>✦</span><div><strong>آزمون ریاضی نمونه</strong><p>۵ پرسش · مناسب تمرین · نتیجه بلافاصله نمایش داده می‌شود</p></div></div>
+      <form id="quizForm" class="quiz-form">
+        <div class="question"><p>۱. حاصل ۷ + ۵ کدام است؟</p><label><input type="radio" name="q1" value="10"> ۱۰</label><label><input type="radio" name="q1" value="12"> ۱۲</label><label><input type="radio" name="q1" value="13"> ۱۳</label></div>
+        <div class="question"><p>۲. کدام عدد از ۳۸ بزرگ‌تر است؟</p><label><input type="radio" name="q2" value="29"> ۲۹</label><label><input type="radio" name="q2" value="36"> ۳۶</label><label><input type="radio" name="q2" value="42"> ۴۲</label></div>
+        <div class="question"><p>۳. سه دسته‌ی ۴تایی چندتا می‌شود؟</p><label><input type="radio" name="q3" value="7"> ۷</label><label><input type="radio" name="q3" value="12"> ۱۲</label><label><input type="radio" name="q3" value="16"> ۱۶</label></div>
+        <div class="question"><p>۴. کدام شکل ۳ ضلع دارد؟</p><label><input type="radio" name="q4" value="دایره"> دایره</label><label><input type="radio" name="q4" value="مثلث"> مثلث</label><label><input type="radio" name="q4" value="مربع"> مربع</label></div>
+        <div class="question"><p>۵. الگو را ادامه بده: ۲، ۴، ۶، ...</p><label><input type="radio" name="q5" value="7"> ۷</label><label><input type="radio" name="q5" value="8"> ۸</label><label><input type="radio" name="q5" value="10"> ۱۰</label></div>
+        <button class="gold-btn" type="submit">ثبت پاسخ‌ها و دیدن نتیجه</button>
+      </form>
+      <div id="quizResult" class="result-box hidden" aria-live="polite"></div>
+    </section>
+
+    <section class="page" id="page-report">
+      <div class="section-heading"><div><h2>کارنامه من</h2><p>گزارش پیشرفت در این دستگاه</p></div><button class="outline-btn" id="resetData">پاک‌کردن داده آزمایشی</button></div>
+      <div class="report-summary"><div><small>میانگین آزمون‌ها</small><strong id="reportAverage">—</strong></div><div><small>درس‌های مطالعه‌شده</small><strong id="studiedCount">۰</strong></div><div><small>آزمون‌ها</small><strong id="reportQuizzes">۰</strong></div></div>
+      <article class="detail-card"><h3>سوابق آزمون</h3><div id="historyList" class="history-list"><p class="empty">هنوز آزمونی ثبت نشده است. اولین آزمونت را انجام بده!</p></div></article>
+      <p class="notice">این کارنامه فقط در همین مرورگر ذخیره می‌شود و هنوز به حساب معلم یا مدیر متصل نیست.</p>
+    </section>
+
+    <section class="page" id="page-teacher">
+      <div class="section-heading"><div><h2>پنل معلم</h2><p>ابزارهای پایه برای مدیریت کلاس</p></div><span class="demo-badge">دمو</span></div>
+      <div class="notice warning">این بخش نمایشی است. برای استفاده واقعی، ورود امن معلمان و ذخیره‌سازی مرکزی باید راه‌اندازی شود.</div>
+      <div class="teacher-grid">
+        <article class="tool-card"><span class="tool-icon">✎</span><h3>ثبت بازخورد</h3><p>برای دانش‌آموز بازخورد آموزشی بنویسید.</p><label>نام دانش‌آموز<input id="studentName" placeholder="مثلاً سارا"></label><label>بازخورد<textarea id="teacherFeedback" placeholder="نقطه قوت و قدم بعدی..."></textarea></label><button class="gold-btn small" id="saveFeedback">ذخیره بازخورد محلی</button><div id="feedbackStatus" class="inline-status"></div></article>
+        <article class="tool-card"><span class="tool-icon">▥</span><h3>نمای کلی کلاس</h3><p>خلاصه‌ای از فعالیت‌های ثبت‌شده در این دستگاه.</p><div class="mini-metric"><span>تعداد آزمون ثبت‌شده</span><strong id="teacherQuizCount">۰</strong></div><div class="mini-metric"><span>میانگین امتیاز</span><strong id="teacherAverage">—</strong></div></article>
+      </div>
+    </section>
+
+    <section class="page" id="page-admin">
+      <div class="section-heading"><div><h2>پنل مدیریت مدرسه</h2><p>چک‌لیست راه‌اندازی سامانه</p></div><span class="demo-badge">دمو</span></div>
+      <div class="notice warning">این پنل هنوز کنترل دسترسی واقعی ندارد؛ اطلاعات حساس یا واقعی دانش‌آموزان را در نسخه نمایشی وارد نکنید.</div>
+      <div class="admin-list">
+        <label><input type="checkbox"> تعریف پایه‌ها و کلاس‌ها</label>
+        <label><input type="checkbox"> ایجاد حساب جداگانه برای مدیر، معلم و والدین</label>
+        <label><input type="checkbox"> تنظیم سیاست حریم خصوصی و رضایت والدین</label>
+        <label><input type="checkbox"> بارگذاری محتوای تأییدشده و متناسب با هر پایه</label>
+        <label><input type="checkbox"> پشتیبان‌گیری و بررسی امنیت</label>
+        <label><input type="checkbox"> آزمایش سامانه با یک کلاس پایلوت</label>
+      </div>
+      <article class="tool-card"><h3>اطلاعات مدرسه</h3><label>نام مدرسه<input value="مدرسه مهد دانش" id="schoolName"></label><label>شعار مدرسه<input value="با دانش، به سوی آینده روشن" id="schoolMotto"></label><button class="gold-btn small" id="saveSchool">ذخیره تنظیمات نمایشی</button><div id="schoolStatus" class="inline-status"></div></article>
+    </section>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <button class="nav-item active" data-page="home"><span>⌂</span><small>خانه</small></button>
+  <button class="nav-item" data-page="lessons"><span>▤</span><small>درس‌ها</small></button>
+  <button class="nav-item" data-page="quiz"><span>✓</span><small>آزمون</small></button>
+  <button class="nav-item" data-page="report"><span>▥</span><small>کارنامه</small></button>
+  <button class="nav-item" data-page="admin"><span>⚙</span><small>مدیریت</small></button>
+</nav>
+
+<div class="modal hidden" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle"><div class="modal-card"><button class="close-btn" id="closeProfile">×</button><h2 id="profileTitle">پروفایل نمایشی</h2><p>برای آزمایش رابط کاربری، نقش و نام نمایشی را انتخاب کنید.</p><label>نام نمایشی<input id="profileNameInput" value="دانش‌آموز نمونه"></label><label>نقش<select id="profileRoleInput"><option value="دانش‌آموز">دانش‌آموز</option><option value="معلم">معلم</option><option value="مدیر">مدیر</option></select></label><button class="gold-btn" id="saveProfile">ذخیره</button><p class="tiny">این انتخاب فقط نمایشی است و جایگزین ورود امن نیست.</p></div></div>
+<div id="toast" class="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
